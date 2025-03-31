@@ -4,80 +4,108 @@
 
 void flushBuffer()
 {
-        int c;
-        while ((c = getchar()) != '\n' && c != EOF);
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
 }
 
-/*  Asks for input from the player and adds their position to the board if its valid
-    @param board - 2d array containing the positions of UNO and TRES
-    @param playerCount - address of the number of positions occupied by the player
-    @param player - the character representing the player
-    @return void
-*/
+void displayBoard(char board[][4])
+{
+    printf("\n%s           COLUMN%s\n", COLOR_WHITEBOLD, COLOR_RESET);
+     printf("%s    -------------------%s\n", COLOR_GRAY, COLOR_RESET);
+    printf("%s         1   2   3   4%s\n", COLOR_WHITEBOLD, COLOR_RESET);
+    printf("%s    -------------------%s\n", COLOR_GRAY, COLOR_RESET);
+
+    for (int i = 0; i < 4; i++)
+    {
+        printf("%sROW %d %s%s|%s ", COLOR_WHITEBOLD, i + 1, COLOR_RESET, COLOR_GRAY, COLOR_RESET);
+        for (int j = 0; j < 4; j++)
+        {
+            if (board[i][j] == '-')
+                printf("%s[-] %s", COLOR_BLUE, COLOR_RESET);
+            else if (board[i][j] == '+')
+                printf("%s[+] %s", COLOR_ORANGE, COLOR_RESET);
+            else
+                printf("[ ] ");
+        }
+        printf("\n");
+    }
+    printf("\n");
+}
+
 void moveUnoTres(char board[][4], int *playerCount, char player)
 {
-    int     x,
-            y,
-            nValid = 0;
-    char    playerName[5];
-    
-    if(player == '1')
-        printf("%s%s%s%s", "Turn of ", COLOR_BLUE, "Uno", COLOR_RESET);
-    else
-        printf("%s%s%s%s", "Turn of ", COLOR_ORANGE, "Tres", COLOR_RESET);
+    int x, y, nValid;
+
+    if (player == '-')  
+        printf("Turn of %sUno[-]%s\n", COLOR_BLUE, COLOR_RESET);
+    else  
+        printf("Turn of %sTres[+]%s\n", COLOR_ORANGE, COLOR_RESET);
 
     do {
-        printf("%s%s%s", COLOR_GREEN, "Input the coordinates\n", COLOR_RESET);
-        nValid = scanf("%d,%d", &x, &y);
-        flushBuffer();
-        if (nValid != 2 || x > 4 || x < 0 || y > 4 || y < 0)
-        {
-            printf("%s%s%s", COLOR_REDBOLD, "Error: One of the coordinates are invalid. Please Try again\n", COLOR_RESET);
-        }
-    }
-    while (nValid != 2 || x > 4 || x < 0 || y > 4 || y < 0);
-    if (board[x-1][y-1] == '\0')
-    {
-        nValid = 1;
-        (*playerCount)++;
-        board[x-1][y-1] = player;
-    }
-}
+        do {
+            printf("%sInput row number (1-4):%s\n", COLOR_GREEN, COLOR_RESET);
+            nValid = scanf("%d", &x);
+            flushBuffer();
+            
+            if (nValid != 1 || x < 1 || x > 4)
+                printf("%sError: Invalid row number. Try again.%s\n", COLOR_REDBOLD, COLOR_RESET);
+        } while (nValid != 1 || x < 1 || x > 4);
+        
+        do {
+            printf("%sInput column number (1-4):%s\n", COLOR_GREEN, COLOR_RESET);
+            nValid = scanf("%d", &y);
+            flushBuffer();
+            
+            if (nValid != 1 || y < 1 || y > 4)
+                printf("%sError: Invalid column number. Try again.%s\n", COLOR_REDBOLD, COLOR_RESET);
+        } while (nValid != 1 || y < 1 || y > 4);
+        
+        if (board[x-1][y-1] != '\0')
+            printf("%sError: Position occupied. Try again.%s\n", COLOR_REDBOLD, COLOR_RESET);
+    } while (board[x-1][y-1] != '\0');
 
+    (*playerCount)++;
+    board[x-1][y-1] = player;
+}
 
 void dosMove(char board[][4], int *unoCount, int *tresCount)
 {
-    int x,
-        y,
-        nValid = 0;
-        
-        printf("%s%s%s%s", "Turn of ", COLOR_YELLOW, "Dos", COLOR_RESET);
+    int x, y, nValid;
+    printf("Turn of %sDos%s\n", COLOR_YELLOW, COLOR_RESET);
+
     do {
-        printf("%s%s%s", COLOR_GREEN, "Input the coordinates\n", COLOR_RESET);
-        nValid = scanf("%d,%d", &x, &y);
-        flushBuffer();
-        if (nValid != 2 || x > 4 || x < 0 || y > 4 || y < 0)
-        {
-            printf("%s%s%s", COLOR_REDBOLD, "Error: One of the coordinates are invalid. Please Try again\n", COLOR_RESET);
-        }
-    }
-    while (nValid != 2 || x > 4 || x < 0 || y > 4 || y < 0);
+        do {
+            printf("%sInput row number (1-4):%s\n", COLOR_GREEN, COLOR_RESET);
+            nValid = scanf("%d", &x);
+            flushBuffer();
 
-    if (board[x-1][y-1] == '1' || board[x-1][y-1] == '3')
-    {
-        nValid = 1;
-        if (board[x-1][y-1] == '1')
-        {
-            (*unoCount)--;
+            if (nValid != 1 || x < 1 || x > 4)
+                printf("%sError: Invalid row number. Try again.%s\n", COLOR_REDBOLD, COLOR_RESET);
+        } while (nValid != 1 || x < 1 || x > 4);
+
+        do {
+            printf("%sInput column number (1-4):%s\n", COLOR_GREEN, COLOR_RESET);
+            nValid = scanf("%d", &y);
+            flushBuffer();
+
+            if (nValid != 1 || y < 1 || y > 4)
+                printf("%sError: Invalid column number. Try again.%s\n", COLOR_REDBOLD, COLOR_RESET);
+        } while (nValid != 1 || y < 1 || y > 4);
+
+        if (board[x-1][y-1] != '-' && board[x-1][y-1] != '+') {
+            printf("%sError: No player piece at that position. Try again.%s\n", COLOR_REDBOLD, COLOR_RESET);
         }
-        else
-        {
-            (*tresCount)--;
-        }
-        board[x-1][y-1] = '\0';
+    } while (board[x-1][y-1] != '-' && board[x-1][y-1] != '+');
+
+    if (board[x-1][y-1] == '-') {
+        (*unoCount)--;
+    } else {
+        (*tresCount)--;
     }
 
+    board[x-1][y-1] = '\0';
 }
+
 
 int checkWin(char board[][4], int playerCount, char player)
 {
@@ -144,16 +172,15 @@ int checkWin(char board[][4], int playerCount, char player)
 
 int main()
 {
-    int     i,
-            j,
-            unoCount = 0, // number of positions of Uno
-            tresCount = 0, // number of positions of Tres
-            unoWin = 0,
-            tresWin = 0,
-            turn = 1,
-            go = 0;
-
-    char board[4][4];
+    int unoCount = 0, // number of positions of Uno
+		tresCount = 0, // number of positions of Tres
+		unoWin = 0, 
+		tresWin = 0, 
+		turn = 1, 
+		go = 0,
+		i,j;
+  	
+  	 char board[4][4];
 
     // initialize board
     for (i = 0; i < 4; i++)
@@ -165,37 +192,42 @@ int main()
     }
 
     while (unoCount + tresCount != 16 && // if positions add to 16, board is full
-          !unoWin && 
-          !tresWin)
+				 !unoWin && 
+				 !tresWin)
     {
-        if(turn && go)
+        displayBoard(board);
+
+        if (turn && go)
         {
-            moveUnoTres(board, &unoCount, '1');
-            unoWin = checkWin(board, unoCount, '1');
-            turn = !turn;
-            go = !go;
+            moveUnoTres(board, &unoCount, '-');
+            unoWin = checkWin(board, unoCount, '-');
+            turn = 0;
+            go = 0;
         }
-        else if(!turn && !unoWin)
+        else if (!turn && !unoWin)
         {
             dosMove(board, &unoCount, &tresCount);
-            unoWin = checkWin(board, unoCount, '1');
-            tresWin = checkWin(board, tresCount, '3');
-            turn = !turn;
+            unoWin = checkWin(board, unoCount, '-');
+            tresWin = checkWin(board, tresCount, '+');
+            turn = 1;
         }
-        else if(turn && !go && !unoWin && !tresWin)
+        else if (turn && !go && !unoWin && !tresWin)
         {
-            moveUnoTres(board, &tresCount, '3');
-            tresWin = checkWin(board, tresCount, '3');
-            go = !go;
-        } 
+            moveUnoTres(board, &tresCount, '+');
+            tresWin = checkWin(board, tresCount, '+');
+            go = 1;
+        }
     }
 
-    if(unoCount + tresCount == 16)
-        printf("dos win\n");
-    else if(unoWin)
-        printf("uno win\n");
-    else if(tresWin)
-        printf("tres win\n");
+    displayBoard(board);
+
+    if (unoCount + tresCount == 16)
+        printf("Dos wins!\n");
+    else if (unoWin)
+        printf("Uno wins!\n");
+    else if (tresWin)
+        printf("Tres wins!\n");
 
     return 0;
 }
+
