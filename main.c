@@ -170,14 +170,24 @@ int main()
         else if(!turn && !unoWin)
         {
             dosMove(board, &unoCount, &tresCount);
+            unoWin = checkWin(board, unoCount, '1');
+            tresWin = checkWin(board, tresCount, '3');
             turn = !turn;
         }
-        else if(turn && !go)
+        else if(turn && !go && !unoWin && !tresWin)
         {
             moveUnoTres(board, &tresCount, '3');
+            tresWin = checkWin(board, tresCount, '3');
             go = !go;
         } 
     }
+
+    if(unoCount + tresCount == 16)
+        printf("dos win\n");
+    else if(unoWin)
+        printf("uno win\n");
+    else if(tresWin)
+        printf("tres win\n");
 
     return 0;
 }
