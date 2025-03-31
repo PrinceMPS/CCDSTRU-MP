@@ -1,6 +1,12 @@
 #include <stdio.h>
 #include "colors.h"
 
+void flushBuffer()
+{
+        int c;
+        while ((c = getchar()) != '\n' && c != EOF);
+}
+
 /*  Asks for input from the player and adds their position to the board if its valid
     @param board - 2d array containing the positions of UNO and TRES
     @param playerCount - address of the number of positions occupied by the player
@@ -14,21 +20,21 @@ void moveUnoTres(char board[][4], int *playerCount, char player)
             nValid = 0;
     
     do {
-        printf("Input coordinate or smth\n");
-        scanf("%d,%d", &x, &y);
-        if (board[x-1][y-1] == '\0')
+        printf("%s%s%s", COLOR_GREEN, "Input the coordinates\n", COLOR_RESET);
+        nValid = scanf("%d,%d", &x, &y);
+        flushBuffer();
+        if (nValid != 2 || x > 4 || x < 0 || y > 4 || y < 0)
         {
-            nValid = 1;
-            (*playerCount)++;
-            board[x-1][y-1] = player;
+            printf("%s%s%s", COLOR_REDBOLD, "Error: One of the coordinates are invalid. Please Try again\n", COLOR_RESET);
         }
-        else
-        {
-            printf("Try again bobo\n");
-        }
-
-    }while (nValid == 0);
-
+    }
+    while (nValid != 2 || x > 4 || x < 0 || y > 4 || y < 0);
+    if (board[x-1][y-1] == '\0')
+    {
+        nValid = 1;
+        (*playerCount)++;
+        board[x-1][y-1] = player;
+    }
 }
 
 
@@ -38,29 +44,31 @@ void dosMove(char board[][4], int *unoCount, int *tresCount)
         y,
         nValid = 0;
         
-    do 
-    {
-        printf("Input coordinate or smth\n");
-        scanf("%d,%d", &x, &y);
-        if (board[x-1][y-1] == '1' || board[x-1][y-1] == '3')
+    do {
+        printf("%s%s%s", COLOR_GREEN, "Input the coordinates\n", COLOR_RESET);
+        nValid = scanf("%d,%d", &x, &y);
+        flushBuffer();
+        if (nValid != 2 || x > 4 || x < 0 || y > 4 || y < 0)
         {
-            nValid = 1;
-            if (board[x-1][y-1] == '1')
-            {
-                (*unoCount)--;
-            }
-            else
-            {
-                (*tresCount)--;
-            }
-            board[x-1][y-1] = '\0';
+            printf("%s%s%s", COLOR_REDBOLD, "Error: One of the coordinates are invalid. Please Try again\n", COLOR_RESET);
+        }
+    }
+    while (nValid != 2 || x > 4 || x < 0 || y > 4 || y < 0);
+
+    if (board[x-1][y-1] == '1' || board[x-1][y-1] == '3')
+    {
+        nValid = 1;
+        if (board[x-1][y-1] == '1')
+        {
+            (*unoCount)--;
         }
         else
         {
-            printf("Try again bobo\n");
+            (*tresCount)--;
         }
+        board[x-1][y-1] = '\0';
+    }
 
-    }while (nValid == 0);
 }
 
 int checkWin(char board[][4], int playerCount, char player)
