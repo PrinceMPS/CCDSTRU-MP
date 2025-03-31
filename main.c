@@ -139,9 +139,7 @@ int main()
     int     i,
             j,
             unoCount = 0,
-            tresCount = 0,
-            turn = 1,
-            go = 0;
+            tresCount = 0;
 
     char board[4][4];
 
