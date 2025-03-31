@@ -22,9 +22,9 @@ void moveUnoTres(char board[][4], int *playerCount, char player)
     char    playerName[5];
     
     if(player == '1')
-        printf("Turn of %s%s%s\n", playerName);
+        printf("%s%s%s%s", "Turn of ", COLOR_BLUE, "Uno", COLOR_RESET);
     else
-        strcpy(playerName, "Tres");
+        printf("%s%s%s%s", "Turn of ", COLOR_ORANGE, "Tres", COLOR_RESET);
 
     do {
         printf("%s%s%s", COLOR_GREEN, "Input the coordinates\n", COLOR_RESET);
@@ -51,6 +51,7 @@ void dosMove(char board[][4], int *unoCount, int *tresCount)
         y,
         nValid = 0;
         
+        printf("%s%s%s%s", "Turn of ", COLOR_YELLOW, "Dos", COLOR_RESET);
     do {
         printf("%s%s%s", COLOR_GREEN, "Input the coordinates\n", COLOR_RESET);
         nValid = scanf("%d,%d", &x, &y);
