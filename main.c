@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include "colors.h"
 
 void flushBuffer()
@@ -18,7 +19,13 @@ void moveUnoTres(char board[][4], int *playerCount, char player)
     int     x,
             y,
             nValid = 0;
+    char    playerName[5];
     
+    if(player == '1')
+        printf("Turn of %s%s%s\n", playerName);
+    else
+        strcpy(playerName, "Tres");
+
     do {
         printf("%s%s%s", COLOR_GREEN, "Input the coordinates\n", COLOR_RESET);
         nValid = scanf("%d,%d", &x, &y);
