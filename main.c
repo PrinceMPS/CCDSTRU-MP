@@ -138,11 +138,16 @@ int main()
 {
     int     i,
             j,
-            unoCount = 0,
-            tresCount = 0;
+            unoCount = 0, // number of positions of Uno
+            tresCount = 0, // number of positions of Tres
+            unoWin = 0,
+            tresWin = 0,
+            turn = 1,
+            go = 0;
 
     char board[4][4];
 
+    // initialize board
     for (i = 0; i < 4; i++)
     {
         for (j = 0; j < 4; j++)
@@ -150,11 +155,28 @@ int main()
             board[i][j] = '\0';
         }
     }
-    while (unoCount + tresCount != 16)
+
+    while (unoCount + tresCount != 16 && // if positions add to 16, board is full
+          !unoWin && 
+          !tresWin)
     {
-        moveUnoTres(board, &tresCount, '3');
-        moveUnoTres(board, &unoCount, '1');
-        dosMove(board, &unoCount, &tresCount);
+        if(turn && go)
+        {
+            moveUnoTres(board, &unoCount, '1');
+            unoWin = checkWin(board, unoCount, '1');
+            turn = !turn;
+            go = !go;
+        }
+        else if(!turn && !unoWin)
+        {
+            dosMove(board, &unoCount, &tresCount);
+            turn = !turn;
+        }
+        else if(turn && !go)
+        {
+            moveUnoTres(board, &tresCount, '3');
+            go = !go;
+        } 
     }
 
     return 0;
