@@ -2,12 +2,18 @@
 #include <string.h>
 #include "colors.h"
 
+/* 
+    flushBuffer clears the input buffer
+*/
 void flushBuffer()
 {
     int c;
     while ((c = getchar()) != '\n' && c != EOF);
 }
 
+/*
+    displayTitle displays the title card
+*/
 void displayTitle()
 {
     char cStart;
@@ -24,9 +30,12 @@ void displayTitle()
     printf("*======================================*\n");
     printf("         Press [Enter] to start");
     scanf("%c", &cStart);
+    flushBuffer();
 }
 
-
+/*
+    displayTutorial displays the tutorial menu
+*/
 void displayTutorial()
 {
     char cProceed;
@@ -83,6 +92,9 @@ printf("       *================================================================
     flushBuffer();
 }
 
+/*
+    displayMainMenu displays the main menu
+*/
 char displayMainMenu()
 {
     char cOption;
@@ -112,8 +124,10 @@ char displayMainMenu()
     return cOption;
 }
 
-
-
+/*
+    initializeBoard fill the board with '\0'
+    @param board [][] - 2d array to be initialized to '\0'
+*/
 void initializeBoard(char board[][4])
 {
     int i, j;
@@ -123,6 +137,10 @@ void initializeBoard(char board[][4])
             board[i][j] = '\0';
 }
 
+/*
+    displayBoard will display the board with all of the moves that have been previously made
+    @param board [][] - 2d array to be displayed'
+*/
 void displayBoard(char board[][4])
 {
     printf("\n%s           COLUMN%s\n", COLOR_WHITEBOLD, COLOR_RESET);
@@ -147,6 +165,12 @@ void displayBoard(char board[][4])
     printf("\n");
 }
 
+/*
+    moveUnoTres will prompt players Uno or Tres to input coordinates of where they wish to claim their spot.
+    @param board [][] - 2d array where all the moves are stored
+    @param *playerCount - the amount of pieces player has on the board
+    @param player - the number of the player (Uno or Tres)
+*/
 void moveUnoTres(char board[][4], int *playerCount, char player)
 {
     int x, y, nValid;
@@ -185,6 +209,12 @@ void moveUnoTres(char board[][4], int *playerCount, char player)
     board[x-1][y-1] = player;
 }
 
+/*
+    dosMove will prompt Dos to input coordinates of where they wish to remove a claimed spot.
+    @param board [][] - 2d array where all the moves are stored
+    @param *UnoCount - the amount of pieces Uno has on the board
+    @param *tresCount - the number of the player (Uno or Tres)
+*/
 void dosMove(char board[][4], int *unoCount, int *tresCount)
 {
     int x, y, nValid;
@@ -223,7 +253,12 @@ void dosMove(char board[][4], int *unoCount, int *tresCount)
     board[x-1][y-1] = '\0';
 }
 
-
+/*
+    checkWin will check whether Uno or Tres has met one of the win conditions of the game
+    @param board [][] - 2d array where all the moves are stored
+    @param playerCount - the amount of pieces player has on the board
+    @param player - the amount of pieces Tres has on the board
+*/
 int checkWin(char board[][4], int playerCount, char player)
 {
     int x, y, // indices of the board
