@@ -328,8 +328,7 @@ int main()
 		 unoWin, 
 		 tresWin, 
 		 turn, 
-		 go,
-		 i, j;
+		 go;
   	char board[4][4],
          cOption;
 
