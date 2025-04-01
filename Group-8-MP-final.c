@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#include "colors.h"
+#include "Group-8-MP-colors.h"
 
 /* 
     flushBuffer clears the input buffer
