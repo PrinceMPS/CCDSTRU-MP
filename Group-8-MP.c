@@ -118,6 +118,51 @@ char displayMainMenu()
     return cOption;
 }
 
+void displayWin(int unoWin, int tresWin, int dosWin)
+{
+    char cProceed;
+
+    if(unoWin)
+    {
+        printf("*==========================*\n");
+        printf("|%s       __  __             %s|\n", COLOR_BLUE, COLOR_RESET);
+        printf("|%s      / / / /__  ___      %s|\n", COLOR_BLUE, COLOR_RESET);
+        printf("|%s     / /_/ / _ \\/ _ \\     %s|\n", COLOR_BLUE, COLOR_RESET);
+        printf("|%s   _ \\____/_//_/\\___/  __ %s|\n", COLOR_BLUE, COLOR_RESET);
+        printf("|%s  | | /| / (_)__  ___ / / %s|\n", COLOR_BLUE, COLOR_RESET);
+        printf("|%s  | |/ |/ / / _ \\(_-</_/  %s|\n", COLOR_BLUE, COLOR_RESET);
+        printf("|%s  |__/|__/_/_//_/___(_)   %s|\n", COLOR_BLUE, COLOR_RESET);
+        printf("*==========================*\n");
+    }
+    else if(dosWin == 16)
+    {
+        printf("*==========================*\n");
+        printf("|%s         ___              %s|\n", COLOR_YELLOW, COLOR_RESET);
+        printf("|%s        / _ \\___  ___     %s|\n", COLOR_YELLOW, COLOR_RESET);
+        printf("|%s       / // / _ \\(_-<     %s|\n", COLOR_YELLOW, COLOR_RESET);
+        printf("|%s   _  /____/\\___/___/  __ %s|\n", COLOR_YELLOW, COLOR_RESET);
+        printf("|%s  | | /| / (_)__  ___ / / %s|\n", COLOR_YELLOW, COLOR_RESET);
+        printf("|%s  | |/ |/ / / _ \\(_-</_/  %s|\n", COLOR_YELLOW, COLOR_RESET);
+        printf("|%s  |__/|__/_/_//_/___(_)   %s|\n", COLOR_YELLOW, COLOR_RESET);
+        printf("*==========================*\n");
+    }
+    else if(tresWin)
+    {
+        printf("*==========================*\n");
+        printf("|%s      ______              %s|\n", COLOR_ORANGE, COLOR_RESET);
+        printf("|%s     /_  __/______ ___    %s|\n", COLOR_ORANGE, COLOR_RESET);
+        printf("|%s      / / / __/ -_|_-<    %s|\n", COLOR_ORANGE, COLOR_RESET);
+        printf("|%s   _ /_/ /_/  \\__/___/ __ %s|\n", COLOR_ORANGE, COLOR_RESET);
+        printf("|%s  | | /| / (_)__  ___ / / %s|\n", COLOR_ORANGE, COLOR_RESET);
+        printf("|%s  | |/ |/ / / _ \\(_-</_/  %s|\n", COLOR_ORANGE, COLOR_RESET);
+        printf("|%s  |__/|__/_/_//_/___(_)   %s|\n", COLOR_ORANGE, COLOR_RESET);
+        printf("*==========================*\n");
+    }
+    printf("Press [Enter] to return to main menu...");
+    scanf("%c", &cProceed);
+    printf("\n");
+}
+
 /*
     initializeBoard fill the board with '\0'
     @param board - 2d array to be initialized to '\0'
@@ -374,12 +419,7 @@ int main()
 
             displayBoard(board);
 
-            if (unoCount + tresCount == 16)
-                printf("Dos wins!\n");
-            else if (unoWin)
-                printf("Uno wins!\n");
-            else if (tresWin)
-                printf("Tres wins!\n");
+            displayWin(unoWin, tresWin, unoCount + tresCount);
         }
         else if(cOption == '2') // tutorial
             displayTutorial();
