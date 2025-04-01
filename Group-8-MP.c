@@ -118,7 +118,13 @@ char displayMainMenu()
     return cOption;
 }
 
-void displayWin(int unoWin, int tresWin, int dosWin)
+/*
+    displayWin displays a banner showing who won
+    @param unoWin - 1 if Uno wins, 0 if not
+    @param dosWin - 1 if Dos wins, 0 if not
+    @param tresWin - 1 if Tres wins, 0 if not
+*/
+void displayWin(int unoWin, int dosWin, int tresWin)
 {
     char cProceed;
 
@@ -134,7 +140,7 @@ void displayWin(int unoWin, int tresWin, int dosWin)
         printf("|%s  |__/|__/_/_//_/___(_)   %s|\n", COLOR_BLUE, COLOR_RESET);
         printf("*==========================*\n");
     }
-    else if(dosWin == 16)
+    else if(dosWin)
     {
         printf("*==========================*\n");
         printf("|%s         ___              %s|\n", COLOR_YELLOW, COLOR_RESET);
@@ -419,7 +425,7 @@ int main()
 
             displayBoard(board);
 
-            displayWin(unoWin, tresWin, unoCount + tresCount);
+            displayWin(unoWin, unoCount + tresCount == 16, tresWin);
         }
         else if(cOption == '2') // tutorial
             displayTutorial();
