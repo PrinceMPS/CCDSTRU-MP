@@ -92,10 +92,11 @@ void moveUnoTres(char board[][4], int *playerCount, char player)
 {
     int x, y, nValid;
 
+    printf("*========================*\n");
     if (player == '-')  
-        printf("Turn of %sUno[-]%s\n", COLOR_BLUE, COLOR_RESET);
+        printf("%sTurn of %sUno[-]%s\n", COLOR_WHITEBOLD, COLOR_BLUE, COLOR_RESET);
     else  
-        printf("Turn of %sTres[+]%s\n", COLOR_ORANGE, COLOR_RESET);
+        printf("%sTurn of %sTres[+]%s\n", COLOR_WHITEBOLD, COLOR_ORANGE, COLOR_RESET);
 
     do {
         do {
@@ -119,6 +120,7 @@ void moveUnoTres(char board[][4], int *playerCount, char player)
         if (board[x-1][y-1] != '\0')
             printf("%sError: Position occupied. Try again.%s\n", COLOR_REDBOLD, COLOR_RESET);
     } while (board[x-1][y-1] != '\0');
+    printf("*========================*\n");
 
     (*playerCount)++;
     board[x-1][y-1] = player;
@@ -127,7 +129,7 @@ void moveUnoTres(char board[][4], int *playerCount, char player)
 void dosMove(char board[][4], int *unoCount, int *tresCount)
 {
     int x, y, nValid;
-    printf("Turn of %sDos%s\n", COLOR_YELLOW, COLOR_RESET);
+    printf("%sTurn of %sDos%s\n", COLOR_WHITEBOLD, COLOR_YELLOW, COLOR_RESET);
 
     do {
         do {
@@ -255,7 +257,7 @@ int main()
 
             initializeBoard(board);
 
-            while (unoCount + tresCount != 16 && // if positions add to 16, board is full
+            while (unoCount + tresCount < 16 && // if positions add to 16, board is full
                   !unoWin && 
                   !tresWin)
             {
@@ -264,23 +266,23 @@ int main()
                 if (turn && go)
                 {
                     moveUnoTres(board, &unoCount, '-');
-                    unoWin = checkWin(board, unoCount, '-');
                     turn = 0;
                     go = 0;
                 }
-                else if (!turn && !unoWin)
+                else if (!turn)
                 {
                     dosMove(board, &unoCount, &tresCount);
-                    unoWin = checkWin(board, unoCount, '-');
-                    tresWin = checkWin(board, tresCount, '+');
                     turn = 1;
                 }
-                else if (turn && !go && !unoWin && !tresWin)
+                else if (turn && !go)
                 {
                     moveUnoTres(board, &tresCount, '+');
-                    tresWin = checkWin(board, tresCount, '+');
                     go = 1;
                 }
+
+                // check winning conditions
+                unoWin = checkWin(board, unoCount, '-');
+                tresWin = checkWin(board, tresCount, '+');
             }
 
             displayBoard(board);
@@ -294,6 +296,6 @@ int main()
         }
 
     } while(cOption != '0');
+
     return 0;
 }
-
