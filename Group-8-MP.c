@@ -26,9 +26,65 @@ void displayTitle()
     scanf("%c", &cStart);
 }
 
+
+void displayTutorial()
+{
+    char cProceed;
+    
+printf("       *================================================================*\n");
+printf("       |                        %sTIC TAC OH NO!%s                          |\n", COLOR_VIOLET, COLOR_RESET);
+printf("       *================================================================*\n");
+
+    
+printf("       *================================================================*\n"); 
+printf("       |                          %sGAME SETUP%s                            |\n", COLOR_GREEN, COLOR_RESET);
+printf("       *================================================================*\n"); 
+printf("       | 1. The game is played on a 4x4 grid.                           |\n");
+printf("       | 2. There are three players:                                    |\n");
+printf("       |    > %sTres (+)%s: Places [+] marks on the grid.                   |\n", COLOR_ORANGE, COLOR_RESET);
+printf("       |    > %sUno (-)%s: Places [-] marks on the grid.                    |\n", COLOR_BLUE, COLOR_RESET);
+printf("       |    > %sDos %s: Can remove a [+] or [-] mark from the grid.         |\n", COLOR_YELLOW, COLOR_RESET);
+printf("       *================================================================*\n\n"); 
+   
+printf("       *================================================================*\n");
+printf("       |                          %sGAME RULES%s                            |\n", COLOR_GREEN, COLOR_RESET);
+printf("       *================================================================*\n");
+printf("       | 1. The turn order is as follows:                               |\n");
+printf("       | 	%s>Tres -> Uno -> Dos%s                                     |\n", COLOR_GREEN, COLOR_RESET);
+printf("       | 2. Tres and Uno take turns placing their marks                 |\n");
+printf("       | 3. Dos's move is to remove any mark ([+] or [-]) from the grid |\n");
+printf("       *================================================================*\n\n"); 
+
+
+   
+printf("       *================================================================*\n");
+printf("       |                      %sWINNING CONDITIONS%s                        |\n", COLOR_GREEN, COLOR_RESET);
+printf("       *================================================================*\n");
+printf("       |  1. %sTres%s and %sUno%s wins if they:                                 |  \n",COLOR_ORANGE, COLOR_RESET,COLOR_BLUE, COLOR_RESET);
+printf("       | 	> Occupy the topmost or bottommost row                  |\n");
+printf("       | 		(without having marks in any other tile)        |\n");
+printf("       | 	> Occupy a full diagonal line                           |\n");
+printf("       | 		(without having marks in any other tile)        |\n");
+printf("       | 2. %sDos %s wins if the grid is filled and no one has won          |\n",COLOR_YELLOW, COLOR_RESET);
+printf("       *================================================================*\n\n");
+
+    
+   
+printf("       *================================================================*\n");
+printf("       |                         %sGAME CONTROLS%s                          |\n", COLOR_GREEN, COLOR_RESET);
+printf("       *================================================================*\n");
+printf("       | 1. %sTres%s: Enter coordinates to place %s[+]%s                        |\n",COLOR_ORANGE,COLOR_RESET,COLOR_ORANGE,COLOR_RESET);
+printf("       | 2. %sUno%s: Enter coordinates to place %s[-]%s                         |\n",COLOR_BLUE,COLOR_RESET,COLOR_BLUE,COLOR_RESET);
+printf("       | 3. %sDos%s: Enter coordinates to remove a mark                     |\n",COLOR_YELLOW,COLOR_RESET);
+printf("       *================================================================*\n\n");
+    
+    printf("Press [Enter] to return to the main menu...");
+    scanf("%c", &cProceed);
+    flushBuffer();
+}
+
 char displayMainMenu()
 {
-    int nValid;
     char cOption;
 
     printf("\n       *========================*\n");
@@ -42,19 +98,21 @@ char displayMainMenu()
     do
     {
         printf("       %sEnter Option: %s", COLOR_GREEN, COLOR_RESET);
-        nValid = scanf(" %c", &cOption);
+        scanf(" %c", &cOption);
         flushBuffer();
-        if ((cOption < '0' || cOption > '2') && nValid != 1)
+        if(cOption < '0' || cOption > '2')
             printf("       %sError: Invalid input. Try again.%s\n", COLOR_RED, COLOR_RESET);
-    } while((cOption < '0' || cOption > '2') && nValid != 1);
+    } while(cOption < '0' || cOption > '2');
     
+    // Call the Tutorial function if option 2 is selected
+    if (cOption == '2') {
+        displayTutorial();  // This will now handle the tutorial selection
+    }
+
     return cOption;
 }
 
-void displayTutorial()
-{
 
-}
 
 void initializeBoard(char board[][4])
 {
