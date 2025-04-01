@@ -39,59 +39,60 @@ void displayTutorial()
 {
     char cProceed;
     
-printf("       *================================================================*\n");
-printf("       |                        %sTIC TAC OH NO!%s                          |\n", COLOR_VIOLET, COLOR_RESET);
-printf("       *================================================================*\n");
+    printf("*================================================================*\n");
+    printf("|                        %sTIC TAC OH NO!%s                          |\n", COLOR_VIOLET, COLOR_RESET);
+    printf("*================================================================*\n");
 
+    printf("*================================================================*\n"); 
+    printf("|                          %sGAME SETUP%s                            |\n", COLOR_GREEN, COLOR_RESET);
+    printf("*================================================================*\n"); 
+    printf("| 1. The game is played on a 4x4 grid.                           |\n");
+    printf("| 2. There are three players:                                    |\n");
+    printf("|    > %sTres (+)%s: Places [+] marks on the grid.                   |\n", COLOR_ORANGE, COLOR_RESET);
+    printf("|    > %sUno (-)%s: Places [-] marks on the grid.                    |\n", COLOR_BLUE, COLOR_RESET);
+    printf("|    > %sDos %s: Can remove a [+] or [-] mark from the grid.         |\n", COLOR_YELLOW, COLOR_RESET);
+    printf("*================================================================*\n"); 
+    printf(" Press [Enter] to Proceed");
+    scanf("%c", &cProceed);
     
-printf("       *================================================================*\n"); 
-printf("       |                          %sGAME SETUP%s                            |\n", COLOR_GREEN, COLOR_RESET);
-printf("       *================================================================*\n"); 
-printf("       | 1. The game is played on a 4x4 grid.                           |\n");
-printf("       | 2. There are three players:                                    |\n");
-printf("       |    > %sTres (+)%s: Places [+] marks on the grid.                   |\n", COLOR_ORANGE, COLOR_RESET);
-printf("       |    > %sUno (-)%s: Places [-] marks on the grid.                    |\n", COLOR_BLUE, COLOR_RESET);
-printf("       |    > %sDos %s: Can remove a [+] or [-] mark from the grid.         |\n", COLOR_YELLOW, COLOR_RESET);
-printf("       *================================================================*\n\n"); 
-   
-printf("       *================================================================*\n");
-printf("       |                          %sGAME RULES%s                            |\n", COLOR_GREEN, COLOR_RESET);
-printf("       *================================================================*\n");
-printf("       | 1. The turn order is as follows:                               |\n");
-printf("       | 	%s>Tres -> Uno -> Dos%s                                     |\n", COLOR_GREEN, COLOR_RESET);
-printf("       | 2. Tres and Uno take turns placing their marks                 |\n");
-printf("       | 3. Dos's move is to remove any mark ([+] or [-]) from the grid |\n");
-printf("       *================================================================*\n\n"); 
+    printf("*================================================================*\n");
+    printf("|                          %sGAME RULES%s                            |\n", COLOR_GREEN, COLOR_RESET);
+    printf("*================================================================*\n");
+    printf("| 1. The turn order is as follows:                               |\n");
+    printf("|      %s>Tres -> Uno -> Dos%s                                       |\n", COLOR_GREEN, COLOR_RESET);
+    printf("| 2. Tres and Uno take turns placing their marks                 |\n");
+    printf("| 3. Dos's move is to remove any mark ([+] or [-]) from the grid |\n");
+    printf("*================================================================*\n"); 
+    printf(" Press [Enter] to Proceed");
+    scanf("%c", &cProceed);
 
+    printf("*================================================================*\n");
+    printf("|                      %sWINNING CONDITIONS%s                        |\n", COLOR_GREEN, COLOR_RESET);
+    printf("*================================================================*\n");
+    printf("|  1. %sTres%s or %sUno%s wins if they:                                  |  \n",COLOR_ORANGE, COLOR_RESET,COLOR_BLUE, COLOR_RESET);
+    printf("|     > Occupy the topmost or bottommost row                     |\n");
+    printf("|       (without having marks in any other tile)                 |\n");
+    printf("|     > Occupy a full diagonal line                              |\n");
+    printf("|       (without having marks in any other tile)                 |\n");
+    printf("|  2. %sDos %s wins if the grid is filled and no one has won          |\n",COLOR_YELLOW, COLOR_RESET);
+    printf("*================================================================*\n");
+    printf(" Press [Enter] to Proceed");
+    scanf("%c", &cProceed);
 
-   
-printf("       *================================================================*\n");
-printf("       |                      %sWINNING CONDITIONS%s                        |\n", COLOR_GREEN, COLOR_RESET);
-printf("       *================================================================*\n");
-printf("       |  1. %sTres%s and %sUno%s wins if they:                                 |  \n",COLOR_ORANGE, COLOR_RESET,COLOR_BLUE, COLOR_RESET);
-printf("       | 	> Occupy the topmost or bottommost row                  |\n");
-printf("       | 		(without having marks in any other tile)        |\n");
-printf("       | 	> Occupy a full diagonal line                           |\n");
-printf("       | 		(without having marks in any other tile)        |\n");
-printf("       | 2. %sDos %s wins if the grid is filled and no one has won          |\n",COLOR_YELLOW, COLOR_RESET);
-printf("       *================================================================*\n\n");
-
-    
-   
-printf("       *================================================================*\n");
-printf("       |                         %sGAME CONTROLS%s                          |\n", COLOR_GREEN, COLOR_RESET);
-printf("       *================================================================*\n");
-printf("       | 1. %sTres%s: Enter coordinates to place %s[+]%s                        |\n",COLOR_ORANGE,COLOR_RESET,COLOR_ORANGE,COLOR_RESET);
-printf("       | 2. %sUno%s: Enter coordinates to place %s[-]%s                         |\n",COLOR_BLUE,COLOR_RESET,COLOR_BLUE,COLOR_RESET);
-printf("       | 3. %sDos%s: Enter coordinates to remove a mark                     |\n",COLOR_YELLOW,COLOR_RESET);
-printf("       *================================================================*\n\n");
-    
+    printf("*================================================================*\n");
+    printf("|                         %sGAME CONTROLS%s                          |\n", COLOR_GREEN, COLOR_RESET);
+    printf("*================================================================*\n");
+    printf("| 1. %sTres%s: Enter coordinates to place %s[+]%s                        |\n",COLOR_ORANGE,COLOR_RESET,COLOR_ORANGE,COLOR_RESET);
+    printf("| 2. %sUno%s: Enter coordinates to place %s[-]%s                         |\n",COLOR_BLUE,COLOR_RESET,COLOR_BLUE,COLOR_RESET);
+    printf("| 3. %sDos%s: Enter coordinates to remove a mark                     |\n",COLOR_YELLOW,COLOR_RESET);
+    printf("*================================================================*\n");
     printf("Press [Enter] to return to the main menu...");
     scanf("%c", &cProceed);
 }
 
 /*
     displayMainMenu displays the main menu
+    @return the choice of the user in the main menu
 */
 char displayMainMenu()
 {
@@ -109,21 +110,17 @@ char displayMainMenu()
     {
         printf("       %sEnter Option: %s", COLOR_GREEN, COLOR_RESET);
         scanf(" %c", &cOption);
+        flushBuffer();
         if(cOption < '0' || cOption > '2')
             printf("       %sError: Invalid input. Try again.%s\n", COLOR_RED, COLOR_RESET);
     } while(cOption < '0' || cOption > '2');
     
-    // Call the Tutorial function if option 2 is selected
-    if (cOption == '2') {
-        displayTutorial();  // This will now handle the tutorial selection
-    }
-
     return cOption;
 }
 
 /*
     initializeBoard fill the board with '\0'
-    @param board [][] - 2d array to be initialized to '\0'
+    @param board - 2d array to be initialized to '\0'
 */
 void initializeBoard(char board[][4])
 {
@@ -136,7 +133,7 @@ void initializeBoard(char board[][4])
 
 /*
     displayBoard will display the board with all of the moves that have been previously made
-    @param board [][] - 2d array to be displayed'
+    @param board - 2d array to be displayed'
 */
 void displayBoard(char board[][4])
 {
@@ -150,11 +147,11 @@ void displayBoard(char board[][4])
         printf("%sROW %d %s%s|%s ", COLOR_WHITEBOLD, i + 1, COLOR_RESET, COLOR_GRAY, COLOR_RESET);
         for (int j = 0; j < 4; j++)
         {
-            if (board[i][j] == '-')
+            if (board[i][j] == '-') // position occupied by Uno
                 printf("%s[-] %s", COLOR_BLUE, COLOR_RESET);
-            else if (board[i][j] == '+')
+            else if (board[i][j] == '+') // position occupied by Tres
                 printf("%s[+] %s", COLOR_ORANGE, COLOR_RESET);
-            else
+            else // position is unoccupied
                 printf("[ ] ");
         }
         printf("\n");
@@ -164,9 +161,9 @@ void displayBoard(char board[][4])
 
 /*
     moveUnoTres will prompt players Uno or Tres to input coordinates of where they wish to claim their spot.
-    @param board [][] - 2d array where all the moves are stored
+    @param board - 2d array where all the moves are stored
     @param *playerCount - the amount of pieces player has on the board
-    @param player - the number of the player (Uno or Tres)
+    @param player - the symbol of the player (Uno or Tres)
 */
 void moveUnoTres(char board[][4], int *playerCount, char player)
 {
@@ -178,8 +175,8 @@ void moveUnoTres(char board[][4], int *playerCount, char player)
     else  
         printf("%sTurn of %sTres[+]%s\n", COLOR_WHITEBOLD, COLOR_ORANGE, COLOR_RESET);
 
-    do {
-        do {
+    do { // repeatedly ask for a position until the user inputs a valid position
+        do { // ask for row number
             printf("%sInput row number (1-4):%s\n", COLOR_GREEN, COLOR_RESET);
             nValid = scanf("%d", &x);
             flushBuffer();
@@ -188,7 +185,7 @@ void moveUnoTres(char board[][4], int *playerCount, char player)
                 printf("%sError: Invalid row number. Try again.%s\n", COLOR_REDBOLD, COLOR_RESET);
         } while (nValid != 1 || x < 1 || x > 4);
         
-        do {
+        do { // ask for column number
             printf("%sInput column number (1-4):%s\n", COLOR_GREEN, COLOR_RESET);
             nValid = scanf("%d", &y);
             flushBuffer();
@@ -202,23 +199,23 @@ void moveUnoTres(char board[][4], int *playerCount, char player)
     } while (board[x-1][y-1] != '\0');
     printf("*========================*\n");
 
-    (*playerCount)++;
-    board[x-1][y-1] = player;
+    (*playerCount)++; // add the number of positions
+    board[x-1][y-1] = player; // assign the character symbol to a position on the board
 }
 
 /*
     dosMove will prompt Dos to input coordinates of where they wish to remove a claimed spot.
-    @param board [][] - 2d array where all the moves are stored
-    @param *UnoCount - the amount of pieces Uno has on the board
-    @param *tresCount - the number of the player (Uno or Tres)
+    @param board - 2d array where all the moves are stored
+    @param *UnoCount - the address of the amount of pieces Uno has on the board
+    @param *tresCount - the address of the number of the player (Uno or Tres)
 */
 void dosMove(char board[][4], int *unoCount, int *tresCount)
 {
     int x, y, nValid;
     printf("%sTurn of %sDos%s\n", COLOR_WHITEBOLD, COLOR_YELLOW, COLOR_RESET);
 
-    do {
-        do {
+    do { // repeatedly ask for a position until the user inputs a valid position
+        do { // ask for row number
             printf("%sInput row number (1-4):%s\n", COLOR_GREEN, COLOR_RESET);
             nValid = scanf("%d", &x);
             flushBuffer();
@@ -227,7 +224,7 @@ void dosMove(char board[][4], int *unoCount, int *tresCount)
                 printf("%sError: Invalid row number. Try again.%s\n", COLOR_REDBOLD, COLOR_RESET);
         } while (nValid != 1 || x < 1 || x > 4);
 
-        do {
+        do { // ask for column number
             printf("%sInput column number (1-4):%s\n", COLOR_GREEN, COLOR_RESET);
             nValid = scanf("%d", &y);
             flushBuffer();
@@ -241,20 +238,20 @@ void dosMove(char board[][4], int *unoCount, int *tresCount)
         }
     } while (board[x-1][y-1] != '-' && board[x-1][y-1] != '+');
 
-    if (board[x-1][y-1] == '-') {
-        (*unoCount)--;
-    } else {
-        (*tresCount)--;
-    }
+    if (board[x-1][y-1] == '-')
+        (*unoCount)--; // subtract positions of Uno by 1
+    else
+        (*tresCount)--; // subtract positions of Tres by 1
 
-    board[x-1][y-1] = '\0';
+    board[x-1][y-1] = '\0'; // make the position on the board empty
 }
 
 /*
     checkWin will check whether Uno or Tres has met one of the win conditions of the game
-    @param board [][] - 2d array where all the moves are stored
+    @param board - 2d array where all the moves are stored
     @param playerCount - the amount of pieces player has on the board
-    @param player - the amount of pieces Tres has on the board
+    @param player - the symbol of the player (Uno or Tres)
+    @return 1 if the plater matches one of the win conditions, 0 if not
 */
 int checkWin(char board[][4], int playerCount, char player)
 {
@@ -312,9 +309,9 @@ int checkWin(char board[][4], int playerCount, char player)
         }
     }
 
-    if(playerWin == 4)
+    if(playerWin == 4) // the player has won
         return 1;
-    else
+    else // the player hasn't won
         return 0;
 }
 
@@ -322,12 +319,12 @@ int main()
 {
     int  unoCount, // number of positions of Uno
 		 tresCount, // number of positions of Tres
-		 unoWin, 
-		 tresWin, 
-		 turn, 
-		 go;
-  	char board[4][4],
-         cOption;
+		 unoWin, // checker if Uno has won (0 or 1)
+		 tresWin, // checker if Tres has won (0 or 1)
+		 turn, // if 0 turn of Dos, if 1, turn of either Uno or Tres
+		 go; // if 0, turn of Tres, if 1, turn of Uno
+  	char board[4][4], // The 4x4 grid of the game (AxA)
+         cOption; // choice of user in main menu
 
     displayTitle();
 
@@ -335,7 +332,7 @@ int main()
     {
         cOption = displayMainMenu();
 
-        if(cOption == '1')
+        if(cOption == '1') // game proper
         {
             // initialization
             unoCount = 0;
@@ -343,7 +340,7 @@ int main()
 		    unoWin = 0;
 		    tresWin = 0;
 		    turn = 1;
-		    go = 0;
+		    go = 0; // Tres will go first
 
             initializeBoard(board);
 
@@ -353,18 +350,18 @@ int main()
             {
                 displayBoard(board);
 
-                if (turn && go)
+                if (turn && go) // Turn of Uno
                 {
                     moveUnoTres(board, &unoCount, '-');
                     turn = 0;
                     go = 0;
                 }
-                else if (!turn)
+                else if (!turn) // Turn of Dos
                 {
                     dosMove(board, &unoCount, &tresCount);
                     turn = 1;
                 }
-                else if (turn && !go)
+                else if (turn && !go) // Turn of Tres
                 {
                     moveUnoTres(board, &tresCount, '+');
                     go = 1;
@@ -384,6 +381,8 @@ int main()
             else if (tresWin)
                 printf("Tres wins!\n");
         }
+        else if(cOption == '2') // tutorial
+            displayTutorial();
 
     } while(cOption != '0');
 
