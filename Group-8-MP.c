@@ -28,6 +28,7 @@ void displayTitle()
 
 char displayMainMenu()
 {
+    int nValid;
     char cOption;
 
     printf("\n       *========================*\n");
@@ -41,11 +42,11 @@ char displayMainMenu()
     do
     {
         printf("       %sEnter Option: %s", COLOR_GREEN, COLOR_RESET);
-        scanf(" %c", &cOption);
+        nValid = scanf(" %c", &cOption);
         flushBuffer();
-        if(cOption < '0' || cOption > '2')
+        if ((cOption < '0' || cOption > '2') && nValid != 1)
             printf("       %sError: Invalid input. Try again.%s\n", COLOR_RED, COLOR_RESET);
-    } while(cOption < '0' || cOption > '2');
+    } while((cOption < '0' || cOption > '2') && nValid != 1);
     
     return cOption;
 }
