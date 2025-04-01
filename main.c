@@ -8,6 +8,24 @@ void flushBuffer()
     while ((c = getchar()) != '\n' && c != EOF);
 }
 
+void displayTitle()
+{
+    char cStart;
+
+    printf("*======================================*\n");
+    printf("|    %s  _______     %s ______             %s|\n", COLOR_BLUE, COLOR_ORANGE, COLOR_RESET);
+    printf("|    %s /_  __(_)___ %s/_  __/__ _____     %s|\n", COLOR_BLUE, COLOR_ORANGE, COLOR_RESET);
+    printf("|    %s  / / / / __/ %s / / / _ `/ __/     %s|\n", COLOR_BLUE, COLOR_ORANGE, COLOR_RESET);
+    printf("|    %s /_/ /_/\\__/ %s /_/  \\_,_/\\__/      %s|\n", COLOR_BLUE, COLOR_ORANGE, COLOR_RESET);
+    printf("|    %s   ____  __       _  __     __    %s|\n", COLOR_YELLOW, COLOR_RESET);
+    printf("|    %s  / __ \\/ /      / |/ /__  / /    %s|\n", COLOR_YELLOW, COLOR_RESET);
+    printf("|    %s / /_/ / _ \\    /    / _ \\/_/     %s|\n", COLOR_YELLOW, COLOR_RESET);
+    printf("|    %s \\____/_//_/   /_/|_/\\___(_)      %s|\n", COLOR_YELLOW, COLOR_RESET);
+    printf("*======================================*\n");
+    printf("         Press [Enter] to start");
+    scanf("%c", &cStart);
+}
+
 void displayBoard(char board[][4])
 {
     printf("\n%s           COLUMN%s\n", COLOR_WHITEBOLD, COLOR_RESET);
@@ -171,15 +189,14 @@ int checkWin(char board[][4], int playerCount, char player)
 
 int main()
 {
-    int unoCount = 0, // number of positions of Uno
-		tresCount = 0, // number of positions of Tres
-		unoWin = 0, 
-		tresWin = 0, 
-		turn = 1, 
-		go = 0,
-		i,j;
-  	
-  	 char board[4][4];
+    int  unoCount = 0, // number of positions of Uno
+		 tresCount = 0, // number of positions of Tres
+		 unoWin = 0, 
+		 tresWin = 0, 
+		 turn = 1, 
+		 go = 0,
+		 i,j;
+  	char board[4][4];
 
     // initialize board
     for (i = 0; i < 4; i++)
@@ -189,6 +206,8 @@ int main()
             board[i][j] = '\0';
         }
     }
+
+    displayTitle();
 
     while (unoCount + tresCount != 16 && // if positions add to 16, board is full
 				 !unoWin && 
