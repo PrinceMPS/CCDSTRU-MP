@@ -30,7 +30,7 @@ char displayMainMenu()
 {
     char cOption;
 
-    printf("       *========================*\n");
+    printf("\n       *========================*\n");
     printf("       |        %sMAIN MENU%s       |\n", COLOR_YELLOW, COLOR_RESET);
     printf("       *========================*\n");
     printf("       |   [1]   Play           |\n");
@@ -42,11 +42,26 @@ char displayMainMenu()
     {
         printf("       %sEnter Option: %s", COLOR_GREEN, COLOR_RESET);
         scanf(" %c", &cOption);
-        if(cOption != '1' && cOption != '2' && cOption != '0')
+        flushBuffer();
+        if(cOption < '0' || cOption > '2')
             printf("       %sError: Invalid input. Try again.%s\n", COLOR_RED, COLOR_RESET);
-    } while (cOption != '1' && cOption != '2' && cOption != '0');
+    } while(cOption < '0' || cOption > '2');
     
     return cOption;
+}
+
+void displayTutorial()
+{
+
+}
+
+void initializeBoard(char board[][4])
+{
+    int i, j;
+
+    for (i = 0; i < 4; i++)
+        for (j = 0; j < 4; j++)
+            board[i][j] = '\0';
 }
 
 void displayBoard(char board[][4])
@@ -212,68 +227,73 @@ int checkWin(char board[][4], int playerCount, char player)
 
 int main()
 {
-    int  unoCount = 0, // number of positions of Uno
-		 tresCount = 0, // number of positions of Tres
-		 unoWin = 0, 
-		 tresWin = 0, 
-		 turn = 1, 
-		 go = 0,
-		 i,j;
+    int  unoCount, // number of positions of Uno
+		 tresCount, // number of positions of Tres
+		 unoWin, 
+		 tresWin, 
+		 turn, 
+		 go,
+		 i, j;
   	char board[4][4],
          cOption;
 
-    // initialize board
-    for (i = 0; i < 4; i++)
-    {
-        for (j = 0; j < 4; j++)
-        {
-            board[i][j] = '\0';
-        }
-    }
-
     displayTitle();
-    cOption = displayMainMenu();
 
-    if(cOption == '1')
-    {    
-        while (unoCount + tresCount != 16 && // if positions add to 16, board is full
-                    !unoWin && 
-                    !tresWin)
+    do 
+    {
+        cOption = displayMainMenu();
+
+        if(cOption == '1')
         {
+            // initialization
+            unoCount = 0;
+		    tresCount = 0;
+		    unoWin = 0;
+		    tresWin = 0;
+		    turn = 1;
+		    go = 0;
+
+            initializeBoard(board);
+
+            while (unoCount + tresCount != 16 && // if positions add to 16, board is full
+                  !unoWin && 
+                  !tresWin)
+            {
+                displayBoard(board);
+
+                if (turn && go)
+                {
+                    moveUnoTres(board, &unoCount, '-');
+                    unoWin = checkWin(board, unoCount, '-');
+                    turn = 0;
+                    go = 0;
+                }
+                else if (!turn && !unoWin)
+                {
+                    dosMove(board, &unoCount, &tresCount);
+                    unoWin = checkWin(board, unoCount, '-');
+                    tresWin = checkWin(board, tresCount, '+');
+                    turn = 1;
+                }
+                else if (turn && !go && !unoWin && !tresWin)
+                {
+                    moveUnoTres(board, &tresCount, '+');
+                    tresWin = checkWin(board, tresCount, '+');
+                    go = 1;
+                }
+            }
+
             displayBoard(board);
 
-            if (turn && go)
-            {
-                moveUnoTres(board, &unoCount, '-');
-                unoWin = checkWin(board, unoCount, '-');
-                turn = 0;
-                go = 0;
-            }
-            else if (!turn && !unoWin)
-            {
-                dosMove(board, &unoCount, &tresCount);
-                unoWin = checkWin(board, unoCount, '-');
-                tresWin = checkWin(board, tresCount, '+');
-                turn = 1;
-            }
-            else if (turn && !go && !unoWin && !tresWin)
-            {
-                moveUnoTres(board, &tresCount, '+');
-                tresWin = checkWin(board, tresCount, '+');
-                go = 1;
-            }
+            if (unoCount + tresCount == 16)
+                printf("Dos wins!\n");
+            else if (unoWin)
+                printf("Uno wins!\n");
+            else if (tresWin)
+                printf("Tres wins!\n");
         }
 
-        displayBoard(board);
-
-        if (unoCount + tresCount == 16)
-            printf("Dos wins!\n");
-        else if (unoWin)
-            printf("Uno wins!\n");
-        else if (tresWin)
-            printf("Tres wins!\n");
-    }
-
+    } while(cOption != '0');
     return 0;
 }
 
