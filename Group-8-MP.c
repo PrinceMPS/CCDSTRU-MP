@@ -112,7 +112,7 @@ char displayMainMenu()
         scanf(" %c", &cOption);
         flushBuffer();
         if(cOption < '0' || cOption > '2')
-            printf("       %sError: Invalid input. Try again.%s\n", COLOR_RED, COLOR_RESET);
+            printf("       %sError: Invalid input. Try again.%s\n", COLOR_REDBOLD, COLOR_RESET);
     } while(cOption < '0' || cOption > '2');
     
     return cOption;
