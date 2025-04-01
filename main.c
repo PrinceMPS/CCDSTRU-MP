@@ -157,8 +157,7 @@ int checkWin(char board[][4], int playerCount, char player)
             y = 0;
             while (board[3][y] == player && y < 4)
             {
-                x++;
-                y--;
+                y++;
                 playerWin++;
             }    
         }
