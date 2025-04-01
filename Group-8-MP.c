@@ -30,7 +30,6 @@ void displayTitle()
     printf("*======================================*\n");
     printf("         Press [Enter] to start");
     scanf("%c", &cStart);
-    flushBuffer();
 }
 
 /*
@@ -89,7 +88,6 @@ printf("       *================================================================
     
     printf("Press [Enter] to return to the main menu...");
     scanf("%c", &cProceed);
-    flushBuffer();
 }
 
 /*
@@ -111,7 +109,6 @@ char displayMainMenu()
     {
         printf("       %sEnter Option: %s", COLOR_GREEN, COLOR_RESET);
         scanf(" %c", &cOption);
-        flushBuffer();
         if(cOption < '0' || cOption > '2')
             printf("       %sError: Invalid input. Try again.%s\n", COLOR_RED, COLOR_RESET);
     } while(cOption < '0' || cOption > '2');
